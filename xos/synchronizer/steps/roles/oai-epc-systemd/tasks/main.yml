@@ -1,0 +1,21 @@
+- name: check if there is already a systemd definition of {{TARGET_SERVICE}}
+  stat:
+    path: /etc/systemd/system/{{TARGET_SERVICE}}.service
+  register: service_stat
+
+- name: stop running systemd service of {{TARGET_SERVICE}} if exists
+  systemd:
+    name: "{{TARGET_SERVICE}}.service"
+    state: stopped
+  when: service_stat.stat.exists
+
+- name: setup systemd service definition of {{TARGET_SERVICE}}
+  copy:
+    src: "{{TARGET_SERVICE}}.service"
+    dest: "/etc/systemd/system/"
+
+- name: start {{TARGET_SERVICE}} service
+  systemd:
+    name: "{{TARGET_SERVICE}}.service"
+    state: started
+  when: RUN_SERVICE is defined and RUN_SERVICE
