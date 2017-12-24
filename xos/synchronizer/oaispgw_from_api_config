@@ -1,9 +1,9 @@
 # Sets options for the synchronizer
 [observer]
-name=oaiservice
-dependency_graph=/opt/xos/synchronizers/oaiservice/model-deps
-steps_dir=/opt/xos/synchronizers/oaiservice/steps
-sys_dir=/opt/xos/synchronizers/oaiservice/sys
+name=oaispgw
+dependency_graph=/opt/xos/synchronizers/oaispgw/model-deps
+steps_dir=/opt/xos/synchronizers/oaispgw/steps
+sys_dir=/opt/xos/synchronizers/oaispgw/sys
 #logfile=/var/log/xos_backend.log
 log_file=console
 log_level=debug
@@ -14,7 +14,7 @@ proxy_ssh=True
 proxy_ssh_key=/opt/cord_profile/node_key
 proxy_ssh_user=root
 accessor_kind=api
-accessor_password=@/opt/xos/services/oaiservice/credentials/xosadmin@opencord.org
+accessor_password=@/opt/xos/services/oaispgw/credentials/xosadmin@opencord.org
 
 [networking]
 use_vtn=True

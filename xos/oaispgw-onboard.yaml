@@ -22,15 +22,15 @@ imports:
 
 topology_template:
   node_templates:
-    servicecontroller#oaiservice:
+    servicecontroller#oaispgw:
       type: tosca.nodes.ServiceController
       properties:
-          base_url: file:///opt/xos_services/oaiservice/xos/
+          base_url: file:///opt/xos_services/oaispgw/xos/
           # The following will concatenate with base_url automatically, if
           # base_url is non-null.
           xproto: ./
           synchronizer: synchronizer/manifest
-          synchronizer_run: oaiservice-synchronizer.py
-          private_key: file:///opt/xos/key_import/oaiservice_rsa
-          public_key: file:///opt/xos/key_import/oaiservice_rsa.pub
+          synchronizer_run: oaispgw-synchronizer.py
+          private_key: file:///opt/xos/key_import/oaispgw_rsa
+          public_key: file:///opt/xos/key_import/oaispgw_rsa.pub
 

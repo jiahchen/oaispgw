@@ -14,19 +14,19 @@
 # limitations under the License.
 
 
-# xosproject/oaiservice-synchronizer
+# xosproject/oaispgw-synchronizer
 
 FROM xosproject/xos-synchronizer-base:candidate
 
-COPY . /opt/xos/synchronizers/oaiservice
+COPY . /opt/xos/synchronizers/oaispgw
 
 ENTRYPOINT []
 
-WORKDIR "/opt/xos/synchronizers/oaiservice"
+WORKDIR "/opt/xos/synchronizers/oaispgw"
 
 # Label image
 ARG org_label_schema_schema_version=1.0
-ARG org_label_schema_name=oaiservice-synchronizer
+ARG org_label_schema_name=oaispgw-synchronizer
 ARG org_label_schema_version=unknown
 ARG org_label_schema_vcs_url=unknown
 ARG org_label_schema_vcs_ref=unknown
@@ -53,5 +53,5 @@ LABEL org.label-schema.schema-version=$org_label_schema_schema_version \
       org.opencord.component.xos.vcs-url=$org_opencord_component_xos_vcs_url \
       org.opencord.component.xos.vcs-ref=$org_opencord_component_xos_vcs_ref
 
-CMD bash -c "cd /opt/xos/synchronizers/oaiservice; ./run-from-api.sh"
+CMD bash -c "cd /opt/xos/synchronizers/oaispgw; ./run-from-api.sh"
 

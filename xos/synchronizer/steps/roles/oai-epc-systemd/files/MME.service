@@ -1,8 +1,0 @@
-[Unit]
-Description=oai-epc-mme
-
-[Service]
-ExecStart=/root/openair-cn/SCRIPTS/run_mme
-
-[Install]
-WantedBy=multi-user.target

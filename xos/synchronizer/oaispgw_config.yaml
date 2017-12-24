@@ -14,8 +14,16 @@
 # limitations under the License.
 
 
-from synchronizers.new_base.modelaccessor import *
-from synchronizers.new_base.model_policies.model_policy_tenantwithcontainer import TenantWithContainerPolicy
-
-class OAIServiceInstancePolicy(TenantWithContainerPolicy):
-    model_name = "OAIServiceInstance"
+name: oaispgw-synchronizer
+accessor:
+  username: xosadmin@opencord.org
+  password: "@/opt/xos/services/oaispgw/credentials/xosadmin@opencord.org"
+required_models:
+  - OAIService
+  - OAIServiceInstance
+  - ServiceDependency
+  - ServiceMonitoringAgentInfo
+dependency_graph: "/opt/xos/synchronizers/oaispgw/model-deps"
+steps_dir: "/opt/xos/synchronizers/oaispgw/steps"
+sys_dir: "/opt/xos/synchronizers/oaispgw/sys"
+model_policies_dir: "/opt/xos/synchronizers/oaispgw/model_policies"

@@ -15,7 +15,7 @@
 
 
 ---
-# oaiserviceinstance_playbook
+# oaispgwinstance_playbook
 
 - hosts: "{{ instance_name }}"
   connection: ssh
@@ -24,11 +24,5 @@
   gather_facts: no
   vars:
   roles:
-    - python2
-    - oai-identity-file
-    - xos-variables
-    - xos-network
-    - xos-wait-instance
-    - oai-epc-configs
-    - oai-epc-database
-    - oai-epc-systemd
+    - pre-requirement
+    - 

@@ -14,4 +14,4 @@
 # limitations under the License.
 
 
-python oaiservice-synchronizer.py
+python oaispgw-synchronizer.py

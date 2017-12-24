@@ -1,8 +1,0 @@
-[Unit]
-Description=oai-epc-spgw
-
-[Service]
-ExecStart=/root/openair-cn/SCRIPTS/run_spgw
-
-[Install]
-WantedBy=multi-user.target

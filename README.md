@@ -1,6 +1,6 @@
-# oaiservice
+# oaispgw
 
-This service was written to use in ONF/CORD xos project.
+This spgw service was written to use in ONF/CORD xos project.
 
 ## LICENSE
 

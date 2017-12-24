@@ -14,16 +14,21 @@
 # limitations under the License.
 
 
-name: oaiservice-synchronizer
-accessor:
-  username: xosadmin@opencord.org
-  password: "@/opt/xos/services/oaiservice/credentials/xosadmin@opencord.org"
-required_models:
-  - OAIService
-  - OAIServiceInstance
-  - ServiceDependency
-  - ServiceMonitoringAgentInfo
-dependency_graph: "/opt/xos/synchronizers/oaiservice/model-deps"
-steps_dir: "/opt/xos/synchronizers/oaiservice/steps"
-sys_dir: "/opt/xos/synchronizers/oaiservice/sys"
-model_policies_dir: "/opt/xos/synchronizers/oaiservice/model_policies"
+#!/usr/bin/env python
+
+# Runs the standard XOS synchronizer
+
+import importlib
+import os
+import sys
+from xosconfig import Config
+
+config_file = os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + '/oaispgw_config.yaml')
+Config.init(config_file, 'synchronizer-config-schema.yaml')
+
+synchronizer_path = os.path.join(os.path.dirname(
+    os.path.realpath(__file__)), "../../synchronizers/new_base")
+sys.path.append(synchronizer_path)
+mod = importlib.import_module("xos-synchronizer")
+mod.main()
+
