@@ -19,8 +19,8 @@ accessor:
   username: xosadmin@opencord.org
   password: "@/opt/xos/services/oaispgw/credentials/xosadmin@opencord.org"
 required_models:
-  - OAIService
-  - OAIServiceInstance
+  - OAISPGW
+  - OAISPGWInstance
   - ServiceDependency
   - ServiceMonitoringAgentInfo
 dependency_graph: "/opt/xos/synchronizers/oaispgw/model-deps"
