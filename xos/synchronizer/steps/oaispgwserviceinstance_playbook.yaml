@@ -24,3 +24,5 @@
   gather_facts: no
   vars:
   roles:
+    - pre-requirement
+    - spgw-configure
