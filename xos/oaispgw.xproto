@@ -1,14 +1,11 @@
 option name = "oaispgw";
 option app_label = "oaispgw";
-option verbose_name = "OAI Service";
 
-message OAISPGW (Service){
-    option verbose_name = "Open Air Interface Service/PDN Gateway";
-    option name = "oaispgw";
+message OAISPGWService (Service){
+    option verbose_name = "Open Air Interface Service/PDN Gateway Service";
 }
 
-message OAISPGWInstance (TenantWithContainer){
-     option verbose_name = "OAI SPGW Instance";
-     option name = "oaispgwinstance";
+message OAISPGWServiceInstance (TenantWithContainer){
+     option verbose_name = "OAI SPGW Service Instance";
      required string tenant_message = 1 [help_text = "Tenant Message to Display", max_length = 254, null = False, db_index = False, blank = False];
 }

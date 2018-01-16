@@ -17,5 +17,5 @@
 from synchronizers.new_base.modelaccessor import *
 from synchronizers.new_base.model_policies.model_policy_tenantwithcontainer import TenantWithContainerPolicy
 
-class OAISPGWInstancePolicy(TenantWithContainerPolicy):
-    model_name = "OAISPGWInstance"
+class OAISPGWServiceInstancePolicy(TenantWithContainerPolicy):
+    model_name = "OAISPGWServiceInstance"

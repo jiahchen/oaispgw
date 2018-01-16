@@ -26,28 +26,28 @@ sys.path.insert(0, parentdir)
 
 logger = Logger(level=logging.INFO)
 
-class SyncOAISPGWInstance(SyncInstanceUsingAnsible):
+class SyncOAISPGWServiceInstance(SyncInstanceUsingAnsible):
 
-    provides = [OAISPGWInstance]
+    provides = [OAISPGWServiceInstance]
 
-    observes = OAISPGWInstance
+    observes = OAISPGWServiceInstance
 
     requested_interval = 0
 
-    template_name = "oaispgwinstance_playbook.yaml"
+    template_name = "oaispgwserviceinstance_playbook.yaml"
 
     service_key_name = "/opt/xos/synchronizers/oaispgw/oaispgw_private_key"
 
     watches = [ModelLink(ServiceDependency,via='servicedependency'), ModelLink(ServiceMonitoringAgentInfo,via='monitoringagentinfo')]
 
     def __init__(self, *args, **kwargs):
-        super(SyncOAISPGWInstance, self).__init__(*args, **kwargs)
+        super(SyncOAISPGWServiceInstance, self).__init__(*args, **kwargs)
 
     def get_oaispgw(self, o):
         if not o.owner:
             return None
 
-        oaispgw = OAISPGW.objects.filter(id=o.owner.id)
+        oaispgw = OAISPGWService.objects.filter(id=o.owner.id)
 
         if not oaispgw:
             return None
@@ -93,7 +93,7 @@ class SyncOAISPGWInstance(SyncInstanceUsingAnsible):
             logger.info("handle watch notifications for service monitoring agent info...ignoring because target_uri attribute in monitoring agent info:%s is null" % (monitoring_agent_info))
             return
 
-        objs = OAISPGWInstance.objects.all()
+        objs = OAISPGWServiceInstance.objects.all()
         for obj in objs:
             if obj.owner.id != monitoring_agent_info.service.id:
                 logger.info("handle watch notifications for service monitoring agent info...ignoring because service attribute in monitoring agent info:%s is not matching" % (monitoring_agent_info))
@@ -104,7 +104,7 @@ class SyncOAISPGWInstance(SyncInstanceUsingAnsible):
                logger.warn("handle watch notifications for service monitoring agent info...: No valid instance found for object %s" % (str(obj)))
                return
 
-            logger.info("handling watch notification for monitoring agent info:%s for OAISPGWInstance object:%s" % (monitoring_agent_info, obj))
+            logger.info("handling watch notification for monitoring agent info:%s for OAISPGWServiceInstance object:%s" % (monitoring_agent_info, obj))
 
             #Run ansible playbook to update the routing table entries in the instance
             fields = self.get_ansible_fields(instance)
@@ -112,5 +112,5 @@ class SyncOAISPGWInstance(SyncInstanceUsingAnsible):
             fields["target_uri"] = monitoring_agent_info.target_uri
 
             template_name = "monitoring_agent.yaml"
-            super(SyncOAISPGWInstance, self).run_playbook(obj, fields, template_name)
+            super(SyncOAISPGWServiceInstance, self).run_playbook(obj, fields, template_name)
         pass
