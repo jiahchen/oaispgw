@@ -23,6 +23,9 @@
   sudo: yes
   gather_facts: no
   vars:
+    - SPGW_S11_IP: {{ oaispgw_s11_ip }}
+    - SPGW_S1U_IP: {{ oaispgw_s1u_ip }}
+    - SPGW_SGI_IP: {{ oaispgw_sgi_ip }}
   roles:
     - pre-requirement
     - spgw-configure

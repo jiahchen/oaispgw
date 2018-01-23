@@ -39,6 +39,9 @@ class SyncOAISPGWServiceInstance(SyncInstanceUsingAnsible):
 
     def get_extra_attributes(self, o):
         fields = {}
+        fields['oaispgw_s11_ip'] = self.get_my_ip_address(o, 's11_network', 's11_spgw_ip')
+        fields['oaispgw_s1u_ip'] = self.get_my_ip_address(o, 's1u_network', 's1u_spgw_ip')
+        fields['oaispgw_sgi_ip'] = self.get_my_ip_address(o, 'flat_sgi_network', 'sgi_spgw_ip')
 
         return fields
 
