@@ -1,3 +1,0 @@
-- name: Change hostname
-  hostname: 
-    name: "spgw"

@@ -28,3 +28,7 @@
   with_items:
     - { src: 'acl.j2', dest: '/usr/local/etc/oai/freeDiameter/acl.conf' }
     - { src: 'spgw.j2', dest: '/usr/local/etc/oai/spgw.conf' }
+
+- name: Change hostname
+  hostname:
+    name: "spgw"
