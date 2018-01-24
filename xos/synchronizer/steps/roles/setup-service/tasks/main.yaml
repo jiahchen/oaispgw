@@ -1,0 +1,15 @@
+- name: check if there is already a systemd definition of OAI-SPGW
+  stat:
+    path: /etc/systemd/system/oaispgw.service
+  register: service_stat
+
+- name: stop running systemd service of OAI-SPGW if exists
+  systemd:
+    name: "oaispgw.service"
+    state: stopped
+  when: service_stat.stat.exists
+
+- name: setup systemd service definition of OAI-SPGW
+  copy:
+    src: "oaispgw.service"
+    dest: "/etc/systemd/system/"

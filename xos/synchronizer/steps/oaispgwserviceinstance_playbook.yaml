@@ -28,3 +28,4 @@
     - SPGW_SGI_IP: {{ oaispgw_sgi_ip }}
   roles:
     - spgw-configure
+    - setup-service
