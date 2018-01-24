@@ -32,3 +32,21 @@
 - name: Change hostname
   hostname:
     name: "spgw"
+
+- name: set hosts
+  lineinfile:
+    name: /etc/hosts
+    line: "{{item.line}}"
+  with_items:
+    - { line: '127.0.1.1 spgw' }
+
+- name: get default gateway to sgi interface
+  shell: ip route | grep default | grep {{ SPGW_SGI_INTERFACE }} | awk '{print $3}'
+  args:
+    executable: /bin/bash
+  register: SPGW_SGI_GATEWAY
+
+- name: Set default gateway to sgi interface
+  shell: route add default gw {{ SPGW_SGI_GATEWAY }}
+  args:
+    executable: /bin/bash
