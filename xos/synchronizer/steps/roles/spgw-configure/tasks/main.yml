@@ -1,27 +1,27 @@
-- name: create oai config directory
+- name: Create oai config directory
   file:
     path: /usr/local/etc/oai/freeDiameter
     state: directory
 
-- name: get spgw s11 interface
+- name: Get spgw s11 interface
   shell: ifconfig | grep -B1 "inet addr:{{ SPGW_S11_IP }}" | awk '$1!="inet" && $1!="--" {print $1}'
   args:
     executable: /bin/bash
   register: SPGW_S11_INTERFACE
 
-- name: get spgw s1u interface
+- name: Get spgw s1u interface
   shell: ifconfig | grep -B1 "inet addr:{{ SPGW_S1U_IP }}" | awk '$1!="inet" && $1!="--" {print $1}'
   args:
     executable: /bin/bash
   register: SPGW_S1U_INTERFACE
 
-- name: get spgw sgi interface
+- name: Get spgw sgi interface
   shell: ifconfig | grep -B1 "inet addr:{{ SPGW_SGI_IP }}" | awk '$1!="inet" && $1!="--" {print $1}'
   args:
     executable: /bin/bash
   register: SPGW_SGI_INTERFACE
 
-- name: overwrite oai epc configs
+- name: Overwrite oai epc configs
   template:
     src: "{{item.src}}"
     dest: "{{item.dest}}"
@@ -33,20 +33,20 @@
   hostname:
     name: "spgw"
 
-- name: set hosts
+- name: Set hosts
   lineinfile:
     name: /etc/hosts
     line: "{{item.line}}"
   with_items:
     - { line: '127.0.1.1 spgw' }
 
-- name: get default gateway to sgi interface
+- name: Get default gateway of sgi interface
   shell: ip route | grep default | grep "{{ SPGW_SGI_INTERFACE.stdout }}" | awk '{print $3}'
   args:
     executable: /bin/bash
   register: SPGW_SGI_GATEWAY
 
-- name: Set default gateway to sgi interface
+- name: Set default gateway in routing table
   shell: route add default gw "{{ SPGW_SGI_GATEWAY.stdout }}"
   args:
     executable: /bin/bash
