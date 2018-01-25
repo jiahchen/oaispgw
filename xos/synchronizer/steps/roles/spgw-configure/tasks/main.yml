@@ -46,6 +46,11 @@
     executable: /bin/bash
   register: SPGW_SGI_GATEWAY
 
+- name: Delete default gateway in routing table
+  shell: route del default gw "{{ SPGW_SGI_GATEWAY.stdout }}"
+  args:
+    executable: /bin/bash
+
 - name: Set default gateway in routing table
   shell: route add default gw "{{ SPGW_SGI_GATEWAY.stdout }}"
   args:
