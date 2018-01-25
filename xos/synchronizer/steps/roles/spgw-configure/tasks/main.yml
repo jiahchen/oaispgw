@@ -41,12 +41,12 @@
     - { line: '127.0.1.1 spgw' }
 
 - name: get default gateway to sgi interface
-  shell: ip route | grep default | grep {{ SPGW_SGI_INTERFACE }} | awk '{print $3}'
+  shell: ip route | grep default | grep "{{ SPGW_SGI_INTERFACE.stdout }}" | awk '{print $3}'
   args:
     executable: /bin/bash
   register: SPGW_SGI_GATEWAY
 
 - name: Set default gateway to sgi interface
-  shell: route add default gw {{ SPGW_SGI_GATEWAY }}
+  shell: route add default gw "{{ SPGW_SGI_GATEWAY.stdout }}"
   args:
     executable: /bin/bash
