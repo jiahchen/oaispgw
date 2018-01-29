@@ -18,3 +18,8 @@
   systemd:
     name: "oaispgw.service"
     state: started
+
+- name: ReStart service avoid interface can't config error
+  systemd:
+    name: "oaispgw.service"
+    state: restarted
